@@ -1,0 +1,5 @@
+Document1
+Introduction
+This document shows the most commonly used options of the SQL Server SELECT statement. You will first create a simple Customer–Order database, then practice each SELECT option using the same tables. Each section includes one example query you can run directly
+
+
