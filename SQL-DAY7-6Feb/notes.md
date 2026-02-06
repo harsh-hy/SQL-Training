@@ -76,12 +76,187 @@
 
 ------------------------------------------------------
 
-Normalization:
-1NF : Eliminate repeating groups; make sure each field contains only atomic values.
-      For Example : Instead of having a column for multiple phone numbers, create separate rows for each phone number.
-2NF : Remove partial dependencies; ensure all non-key attributes depend on the whole primary key.
-      For Example : In a table with a composite primary key (e.g., OrderID, ProductID), ensure that non-key attributes (e.g., Quantity) depend on both OrderID and ProductID, not just one of them.
-3NF : Remove transitive dependencies; ensure non-key attributes depend only on the primary key.
-      For Example : If a table has columns for EmployeeID, DepartmentID, and DepartmentName, ensure that DepartmentName depends only on DepartmentID, not on EmployeeID.
-BCNF : A stronger version of 3NF; for every functional dependency X -> Y, X should be a super key.
-      For Example : In a table with columns for StudentID, CourseID, and InstructorID, if InstructorID determines CourseID, then InstructorID must be a super key.
+
+
+
+# 📘 Database Normalization
+
+**Normalization** is the process of organizing data in a database to:
+
+* Reduce data redundancy
+* Improve data integrity
+* Eliminate update, insert, and delete anomalies
+
+---
+
+## 1️⃣ First Normal Form (1NF)
+
+### Definition
+
+* Eliminate **repeating groups**
+* Each field must contain **atomic (indivisible) values**
+* Each record must be uniquely identifiable
+
+### Rules
+
+* No multi-valued attributes
+* No repeating columns
+* Use a primary key
+
+### ❌ Unnormalized Table
+
+| StudentID | Name | PhoneNumbers |
+| --------- | ---- | ------------ |
+| 1         | John | 9876, 8765   |
+
+### ✅ 1NF Table
+
+| StudentID | Name | PhoneNumber |
+| --------- | ---- | ----------- |
+| 1         | John | 9876        |
+| 1         | John | 8765        |
+
+---
+
+## 2️⃣ Second Normal Form (2NF)
+
+### Definition
+
+* Table must be in **1NF**
+* Remove **partial dependency**
+* All non-key attributes must depend on the **entire primary key**
+
+### Partial Dependency
+
+Occurs when a non-key attribute depends on **part of a composite key**.
+
+### ❌ 2NF Violation
+
+**Primary Key:** (StudentID, CourseID)
+
+| StudentID | CourseID | StudentName | CourseName |
+| --------- | -------- | ----------- | ---------- |
+| 1         | C1       | John        | Math       |
+
+* `StudentName` depends only on `StudentID`
+* `CourseName` depends only on `CourseID`
+
+### ✅ 2NF Tables
+
+**Student Table**
+
+| StudentID | StudentName |
+| --------- | ----------- |
+| 1         | John        |
+
+**Course Table**
+
+| CourseID | CourseName |
+| -------- | ---------- |
+| C1       | Math       |
+
+**Enrollment Table**
+
+| StudentID | CourseID |
+| --------- | -------- |
+
+---
+
+## 3️⃣ Third Normal Form (3NF)
+
+### Definition
+
+* Table must be in **2NF**
+* Remove **transitive dependency**
+* Non-key attributes should depend **only on the primary key**
+
+### Transitive Dependency
+
+Occurs when:
+
+```
+A → B and B → C
+```
+
+So, `A → C` indirectly.
+
+### ❌ 3NF Violation
+
+| EmpID | EmpName | DeptID | DeptName |
+| ----- | ------- | ------ | -------- |
+
+* `EmpID → DeptID`
+* `DeptID → DeptName`
+* `DeptName` depends **indirectly** on `EmpID`
+
+### ✅ 3NF Tables
+
+**Employee Table**
+
+| EmpID | EmpName | DeptID |
+| ----- | ------- | ------ |
+
+**Department Table**
+
+| DeptID | DeptName |
+| ------ | -------- |
+
+---
+
+## 4️⃣ Boyce–Codd Normal Form (BCNF)
+
+### Definition
+
+* A stronger version of **3NF**
+* For every functional dependency `X → Y`, **X must be a super key**
+
+### ❌ BCNF Violation
+
+| Student | Subject | Professor |
+| ------- | ------- | --------- |
+
+**Functional Dependencies**
+
+* Student → Subject
+* Subject → Professor
+
+👉 `Subject` is **not a super key**, so BCNF is violated.
+
+### ✅ BCNF Decomposition
+
+**Subject Table**
+
+| Subject | Professor |
+| ------- | --------- |
+
+**Enrollment Table**
+
+| Student | Subject |
+| ------- | ------- |
+
+---
+
+## 🧠 Quick Summary Table
+
+| Normal Form | Main Focus                      |
+| ----------- | ------------------------------- |
+| 1NF         | Atomic values                   |
+| 2NF         | No partial dependency           |
+| 3NF         | No transitive dependency        |
+| BCNF        | Determinant must be a super key |
+
+---
+
+## 🎯 Interview One-Liner
+
+> **Normalization reduces redundancy and improves data consistency by organizing data into well-structured tables.**
+
+---
+
+If you want, I can:
+
+* Add **4NF & 5NF**
+* Convert this into **1-page revision notes**
+* Add **real-world SQL examples**
+
+Just tell me 👍
