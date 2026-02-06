@@ -1,7 +1,8 @@
 
----------- SQL – Performance & Concept Notes ----------
 
- 1. Improving SQL Performance
+## SQL – Performance & Concepts (Improved Notes)
+
+### 1. Improving SQL Performance
 
 * Retrieve only the **required page size** (avoid fetching unnecessary rows).
 * Use **pagination** to limit the number of records returned per request.
@@ -11,7 +12,7 @@
 
 ---
 
- 2. Views
+### 2. Views
 
 * **Views** help improve performance by:
 
@@ -27,7 +28,7 @@
 
 ---
 
- 3. Pagination
+### 3. Pagination
 
 * Pagination means **fetching data in chunks instead of all at once**.
 * Often implemented by:
@@ -37,7 +38,7 @@
 
 ---
 
- 4. Indexes
+### 4. Indexes
 
 * **Indexes** improve query performance by speeding up data retrieval.
 * Should be created on:
@@ -48,7 +49,7 @@
 
 ---
 
- 5. Cursors
+### 5. Cursors
 
 * Cursors process data **row by row**.
 * Useful when:
@@ -64,8 +65,9 @@
   * Poor performance for large datasets.
 * Use **transactions** to ensure **atomicity** when required.
 
+---
 
- 6. Temporary Tables
+### 6. Temporary Tables
 
 * Temporary tables store **intermediate results**.
 * Useful for:
@@ -74,7 +76,8 @@
   * Breaking large queries into smaller steps.
 * Automatically removed when the session ends.
 
-------------------------------------------------------
+---
+
 
 
 
