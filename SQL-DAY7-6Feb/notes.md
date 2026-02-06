@@ -250,16 +250,7 @@ So, `A → C` indirectly.
 
 ---
 
-## 🎯 Interview One-Liner
-
 > **Normalization reduces redundancy and improves data consistency by organizing data into well-structured tables.**
 
 ---
 
-If you want, I can:
-
-* Add **4NF & 5NF**
-* Convert this into **1-page revision notes**
-* Add **real-world SQL examples**
-
-Just tell me 👍
